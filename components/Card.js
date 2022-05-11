@@ -29,7 +29,11 @@ export default function Card({ cardData }) {
                         <h4>by {owner.displayName}</h4>
                         <p>{ellipsize(shortDescription, 15)}</p>
                     </div>
-                    <Tags>{tags.slice(0,4).map((tag)=><span>{tag.name}</span>)}</Tags>
+                    <Tags>
+                        {tags.slice(0, 4).map((tag, index) => (
+                            <span key={`tag-${index}`}>{tag.name}</span>
+                        ))}
+                    </Tags>
                 </CardBottom>
             </StyledCard>
         </Link>
@@ -96,19 +100,19 @@ const CardBottom = styled.div`
 `;
 
 const Tags = styled.div`
-  text-transform: lowercase;
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  overflow: hidden;
+    text-transform: lowercase;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
 
-  span {
-      background: ${props => props.theme.accent};
-      border-radius: 10px;
-      padding: 0.3125rem;
-      font-size: 12px;
-      white-space: nowrap;
-      color: white;
-      font-weight: 600;
-  }
+    span {
+        background: ${(props) => props.theme.accent};
+        border-radius: 10px;
+        padding: 0.3125rem;
+        font-size: 12px;
+        white-space: nowrap;
+        color: white;
+        font-weight: 600;
+    }
 `;

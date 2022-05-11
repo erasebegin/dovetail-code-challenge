@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart, AiFillTag } from "react-icons/ai";
 import { format } from "date-fns";
 
-export default function modDetails(props) {
+export default function ModDetails(props) {
     const router = useRouter();
     const modId = router.query.id || [];
 
@@ -64,9 +64,9 @@ export default function modDetails(props) {
                 </Favourite>
             </Header>
             <ImageCarousel showThumbs={false}>
-                {screenshots.map((image) => {
+                {screenshots.map((image, index) => {
                     return (
-                        <div>
+                        <div key={`scrn-${index}`}>
                             <img src={image.url} />
                         </div>
                     );
@@ -88,8 +88,8 @@ export default function modDetails(props) {
                 </div>
             </Ribbon>
             <Tags $bg="yellow">
-                {tags.map((tag) => (
-                    <Tag>
+                {tags.map((tag, index) => (
+                    <Tag key={`tag-${index}`}>
                         <AiFillTag />
                         {tag.name}
                     </Tag>
