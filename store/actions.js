@@ -11,7 +11,7 @@ export const fetchModList = (pagination, sortFilter = "mostPopular") => {
         );
 
         const resData = await response.json();
-            console.log({resData})
+        
         dispatch({ type: SET_MOD_LIST, mods: resData.data });
     };
 };

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
+import Card from "../components/Card";
+import { ClipLoader } from "react-spinners";
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
 import { fetchModList } from "../store/actions";
-import Card from "../components/Card";
 
 export default function Home() {
     const mods = useSelector((state) => state.globalState.modList);
@@ -14,9 +15,12 @@ export default function Home() {
         dispatch(fetchModList({ pageSize: 10 }));
     }, [dispatch]);
 
-    console.log({ mods });
-
-    if (mods.length <= 0) return <p>Loading...</p>;
+    if (mods.length <= 0)
+        return (
+            <Loading>
+                <ClipLoader />
+            </Loading>
+        );
 
     return (
         <>
@@ -64,4 +68,12 @@ const CardsContainer = styled.section`
     @media (min-width: 600px) {
         grid-template-columns: 1fr 1fr;
     }
+`;
+
+const Loading = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

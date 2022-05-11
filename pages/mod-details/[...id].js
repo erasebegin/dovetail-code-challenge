@@ -8,6 +8,7 @@ import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart, AiFillTag } from "react-icons/ai";
 import { format } from "date-fns";
+import { ClipLoader } from "react-spinners";
 
 export default function ModDetailsPage(props) {
     const router = useRouter();
@@ -44,7 +45,12 @@ export default function ModDetailsPage(props) {
         updatedAt,
     } = modDetails ?? {};
 
-    if (!modDetails) return <p>Loading...</p>;
+    if (!modDetails)
+        return (
+            <Loading>
+                <ClipLoader />
+            </Loading>
+        );
 
     return (
         <PageContainer>
@@ -72,7 +78,10 @@ export default function ModDetailsPage(props) {
                     );
                 })}
             </ImageCarousel>
-            <Titles><h1>{title}</h1><h3>By {owner.displayName}</h3></Titles>
+            <Titles>
+                <h1>{title}</h1>
+                <h3>By {owner.displayName}</h3>
+            </Titles>
             <Ribbon $bg="dark">
                 <div>
                     <span>subs</span>
@@ -147,17 +156,16 @@ const Titles = styled.section`
     text-align: center;
     padding: 1rem 2rem;
 
-    h1, h3 {
-      margin: 0;
+    h1,
+    h3 {
+        margin: 0;
     }
-    
+
     h1 {
-      font-size: 2rem;
-      padding-bottom: 0.5rem;
+        font-size: 2rem;
+        padding-bottom: 0.5rem;
     }
-
 `;
-
 
 const Ribbon = styled.section`
     background: ${(props) =>
@@ -166,24 +174,24 @@ const Ribbon = styled.section`
     display: flex;
     justify-content: space-around;
     padding: 1rem;
-    
+
     div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      
-      span:first-child {
-        font-weight: bold;
-        padding-bottom: 0.3125rem;
-      }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        span:first-child {
+            font-weight: bold;
+            padding-bottom: 0.3125rem;
+        }
     }
-    `;
+`;
 
 const Tags = styled(Ribbon)`
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    `;
+`;
 
 const Tag = styled.span`
     display: flex;
@@ -193,7 +201,7 @@ const Tag = styled.span`
     border-radius: 10px;
     padding: 0.5rem;
     text-transform: lowercase;
-    `;
+`;
 
 const ModDetails = styled.section`
     padding: 1rem 2rem;
@@ -206,14 +214,21 @@ const Dates = styled.section`
     padding: 1rem 2rem;
     border-top: 1px solid ${(props) => props.theme.text};
 
-    
     div {
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
 
-      span {
-        font-weight: 400;
-      }
+        span {
+            font-weight: 400;
+        }
     }
+`;
+
+const Loading = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
