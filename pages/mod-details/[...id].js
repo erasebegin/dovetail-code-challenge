@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart, AiFillTag } from "react-icons/ai";
 import { format } from "date-fns";
 
-export default function ModDetails(props) {
+export default function ModDetailsPage(props) {
     const router = useRouter();
     const modId = router.query.id || [];
 
